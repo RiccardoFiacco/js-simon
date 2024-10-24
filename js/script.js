@@ -58,7 +58,7 @@ const instructions = document.getElementById("instructions");
 const array = numberCreation();
 
 //imposto il timer a 20 e lo faccio vedere subitop a schermo
-let retroCounter = 10; 
+let retroCounter = 1; 
 countdown.innerText =retroCounter;
 
 const id = setInterval(function(){   
@@ -73,6 +73,13 @@ const id = setInterval(function(){
 },1000)
 
 form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  console.log(array)
+    event.preventDefault();
+    console.log(array)
+    //checkNumbers(array);
+    let input1 = document.getElementById("input-one").value;
+    let input2 = document.getElementById("input-two").value;
+    let input3 = document.getElementById("input-three").value;
+    let input4 = document.getElementById("input-four").value;
+    let input5 = document.getElementById("input-five").value;
+    console.log(input1, input2, input3, input4, input5);
 })
