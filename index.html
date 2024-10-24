@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <div class="d-flex vh-100 w-50 m-auto d-flex justify-content-center align-items-center flex-column">
+  <div class="d-flex vh-100 w-50 m-auto d-flex justify-content-center align-items-center flex-column" id="refresh">
     <!-- Countdown -->
     <div id="countdown" class="fs-1 fw-bolder"></div>
     <p id="instructions">Memorizza i numeri entro il tempo limite!</p>
@@ -34,7 +34,12 @@
         <input id="input-four"type="number" class="form-control" min="1" max="50" required>
         <input id="input-five"type="number" class="form-control" min="1" max="50" required>
       </div>
-      <button class="btn btn-primary mt-2 d-block mx-auto">Conferma</button>
+      <div class="row justify-content-center align-items-center">
+        <div class="col text-center mb-4">
+          <button id="submitButton" type="submit" class="btn btn-primary mt-4">invia</button> 
+          <!-- <button id="cleanButton" type="button" class="btn btn-danger mt-2 d-block mx-auto">Restart</button>  -->
+        </div>
+      </div>  
       <p class="text-danger text-center" id="message"></p>
     </form>
   </div>

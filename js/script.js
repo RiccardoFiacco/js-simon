@@ -39,9 +39,7 @@ function numberCreation() {
 function checkNumbers(arr,list){    
     let counter = 0;
     for(let i=0; i< list.length; i++){
-        console.log(list[i].value)
         for(let j=0; j<arr.length;j++){
-           console.log(arr[j]);
            if(parseInt(list[i].value )=== arr[j]){
                 counter++;
            }
@@ -75,7 +73,7 @@ const instructions = document.getElementById("instructions");
 //creo i numeri
 const array = numberCreation();
 
-//imposto il timer a 20 e lo faccio vedere subitop a schermo
+//imposto il timer a 10 e lo faccio vedere subitop a schermo
 let retroCounter = 1;
 countdown.innerText = retroCounter;
 
@@ -99,13 +97,23 @@ form.addEventListener("submit", function (event) {
   let counter = checkNumbers(array, nodeList);
 
   if(counter==5){
-    message.className = "text-success fs-1";
+    message.innerText  =" ";
+    message.className = "text-success fs-1 text-center";
     message.innerText +="hai indovinato tutti i numeri!";
   }else if(counter<1){
-    message.className = "text-danger fs-1";
+    message.innerText  =" ";
+    message.className = "text-danger fs-1 text-center";
     message.innerText +="hai indovinato 0 numeri!"
   }else{
+    message.innerText  =" ";
+    message.className = "fs-1 text-center";
     message.innerText +="hai indovinato "+counter+" numeri!"
   }
-
 });
+
+// cleanButton.addEventListener("click", function (event) {
+//     event.preventDefault();
+//     const r = document.getElementById("refresh");
+//     console.log(r)
+//     r.remove();
+// });
