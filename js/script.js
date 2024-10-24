@@ -27,25 +27,34 @@ function numberCreation(){
             </div>`;
         }
 }
-function timer(el){
-    //imposto il timer a 20 e lo faccio vedere subitop a schermo
-    let retroCounter = 5; 
-    el.innerText =retroCounter;
-    //decremento il tempo per ogni secondo
-    setInterval(function(){       
-        el.innerText = retroCounter--;
-
-    },1000)
-    
+//con questa funzione faccio apparire il from nascosto
+function creationGame(){
+    const hiddenForm = document.getElementById("answers-form");
+    console.log(hiddenForm);
+    hiddenForm.className= " ";
 }
 //---------------------------------------------------------
 //------------MAIN CODE------------------------------------
 //---------------------------------------------------------
 const form = document.getElementById("form");
 const countdown = document.getElementById("countdown");
-console.log(countdown)
+
+//creo i numeri
 numberCreation();
-timer(countdown);
+
+//imposto il timer a 20 e lo faccio vedere subitop a schermo
+let retroCounter = 2; 
+countdown.innerText =retroCounter;
+
+const id = setInterval(function(){   
+    //decrcremento e passo valore da stampare a video    
+    countdown.innerText = --retroCounter;
+    //quando il counter ha raggiunto zero stoppo il timer
+    if(retroCounter==0){
+      clearInterval(id); 
+      creationGame();
+    }
+},1000)
 
 
 
