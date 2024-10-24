@@ -29,21 +29,24 @@ function numberCreation(){
 }
 
 //con questa funzione faccio apparire il from nascosto
-function creationGame(){
+function creationGame(countdown, form, numbers){
     //faccio vedere le caselle e il tasto
-    const hiddenForm = document.getElementById("answers-form");
-    console.log(hiddenForm);
-    hiddenForm.className= " ";
+    form.className= " ";
     //nascondo i numeri
-    const numberHide = document.getElementById("numbers");
-    numberHide.className= "d-none";
-    
+    numbers.className= "d-none";
+    //nascondo il timer
+    countdown.className= "d-none";
 }
 //---------------------------------------------------------
 //------------MAIN CODE------------------------------------
 //---------------------------------------------------------
+
+//mi vado a prendere tutti gli elementi di mio interesse
 const form = document.getElementById("form");
 const countdown = document.getElementById("countdown");
+const numberHide = document.getElementById("numbers");
+const hiddenForm = document.getElementById("answers-form");
+
 
 //creo i numeri
 numberCreation();
@@ -58,7 +61,8 @@ const id = setInterval(function(){
     //quando il counter ha raggiunto zero stoppo il timer
     if(retroCounter==0){
       clearInterval(id); 
-      creationGame();
+      //passo gli elementi del dom che voglio modificare
+      creationGame(countdown,hiddenForm, numberHide);
     }
 },1000)
 
