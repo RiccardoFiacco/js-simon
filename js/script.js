@@ -46,7 +46,7 @@ const form = document.getElementById("form");
 const countdown = document.getElementById("countdown");
 const numberHide = document.getElementById("numbers");
 const hiddenForm = document.getElementById("answers-form");
-
+ 
 
 //creo i numeri
 numberCreation();
