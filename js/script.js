@@ -44,7 +44,7 @@ function creationGame(countdown, form, numbers, instructions){
 //---------------------------------------------------------
 
 //mi vado a prendere tutti gli elementi di mio interesse
-const form = document.getElementById("form");
+const form = document.getElementById("answers-form");
 const countdown = document.getElementById("countdown");
 const numberHide = document.getElementById("numbers");
 const hiddenForm = document.getElementById("answers-form");
@@ -68,8 +68,7 @@ const id = setInterval(function(){
     }
 },1000)
 
-// form.addEventListener("submit", function (event) {
-//   event.preventDefault();
-
-
-// })
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  console.log("aaaaaaaaaaaaaaaaaaaaaaa")
+})
