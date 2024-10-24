@@ -29,13 +29,15 @@ function numberCreation(){
 }
 
 //con questa funzione faccio apparire il from nascosto
-function creationGame(countdown, form, numbers){
+function creationGame(countdown, form, numbers, instructions){
     //faccio vedere le caselle e il tasto
     form.className= " ";
     //nascondo i numeri
     numbers.className= "d-none";
     //nascondo il timer
     countdown.className= "d-none";
+    //modifico cosa è scritto a video
+    instructions.innerText = 'immetti i numeri che ricordi';
 }
 //---------------------------------------------------------
 //------------MAIN CODE------------------------------------
@@ -46,7 +48,7 @@ const form = document.getElementById("form");
 const countdown = document.getElementById("countdown");
 const numberHide = document.getElementById("numbers");
 const hiddenForm = document.getElementById("answers-form");
- 
+const instructions = document.getElementById("instructions");
 
 //creo i numeri
 numberCreation();
@@ -62,7 +64,7 @@ const id = setInterval(function(){
     if(retroCounter==0){
       clearInterval(id); 
       //passo gli elementi del dom che voglio modificare
-      creationGame(countdown,hiddenForm, numberHide);
+      creationGame(countdown,hiddenForm, numberHide, instructions);
     }
 },1000)
 
