@@ -1,47 +1,65 @@
 //---------------------------------------------------------
 //------------FUNCTION------------------------------------
 //---------------------------------------------------------
-function randomIntBetween(numOne, numTwo){
-    const flagUno = isNaN(numOne);
-    const flagDue = isNaN(numTwo);
-    let max, min;
-    if(!flagUno && !flagDue){
-         if(numOne>=numTwo){
-            max= numOne;
-            min = numTwo;
-         }else{
-            max = numTwo;
-            min = numOne;
-         }
-         const random = Math.floor(Math.random()*(max-min+1) +min);
-         return random
-    }else{
-         return("non un numero")
+function randomIntBetween(numOne, numTwo) {
+  const flagUno = isNaN(numOne);
+  const flagDue = isNaN(numTwo);
+  let max, min;
+  if (!flagUno && !flagDue) {
+    if (numOne >= numTwo) {
+      max = numOne;
+      min = numTwo;
+    } else {
+      max = numTwo;
+      min = numOne;
     }
+    const random = Math.floor(Math.random() * (max - min + 1) + min);
+    return random;
+  } else {
+    return "non un numero";
+  }
 }
-function numberCreation(){
-    let arrayNum=[];
-    for(let i = 0; i< 5; i++){
-        let num=randomIntBetween(1,50);
-        numbers.innerHTML+= 
-            `<div class="col fs-1">
-                <p>${num}<p>  
-            </div>`;
+function numberCreation() {
+  let arrayNum = [];   
+  do{
+    let num = randomIntBetween(1, 50);
+    if(!arrayNum.includes(num)) {
+        numbers.innerHTML += 
+        `<div class="col fs-1">
+            <p>${num}<p>  
+        </div>`;
         arrayNum.push(num);
+        console.log(num);
+        console.log(arrayNum)
     }
-    return arrayNum;
+  }while(arrayNum.length < 5)
+  return arrayNum;
+}
+
+function checkNumbers(arr,list){    
+    let counter = 0;
+    for(let i=0; i< list.length; i++){
+        console.log(list[i].value)
+        for(let j=0; j<arr.length;j++){
+           console.log(arr[j]);
+           if(parseInt(list[i].value )=== arr[j]){
+                counter++;
+           }
+        }
+    }
+    return counter;
 }
 
 //con questa funzione faccio apparire il from nascosto
-function creationGame(countdown, form, numbers, instructions){
-    //faccio vedere le caselle e il tasto
-    form.className= " ";
-    //nascondo i numeri
-    numbers.className= "d-none";
-    //nascondo il timer
-    countdown.className= "d-none";
-    //modifico cosa è scritto a video
-    instructions.innerText = 'immetti i numeri che ricordi';
+function changingDom(countdown, form, numbers, instructions) {
+  //faccio vedere le caselle e il tasto
+  form.className = " ";
+  //nascondo i numeri
+  numbers.className = "d-none";
+  //nascondo il timer
+  countdown.className = "d-none";
+  //modifico cosa è scritto a video
+  instructions.innerText = "immetti i numeri che ricordi";
 }
 //---------------------------------------------------------
 //------------MAIN CODE------------------------------------
@@ -58,28 +76,36 @@ const instructions = document.getElementById("instructions");
 const array = numberCreation();
 
 //imposto il timer a 20 e lo faccio vedere subitop a schermo
-let retroCounter = 1; 
-countdown.innerText =retroCounter;
+let retroCounter = 1;
+countdown.innerText = retroCounter;
 
-const id = setInterval(function(){   
-    //decrcremento e passo valore da stampare a video    
-    countdown.innerText = --retroCounter;
-    //quando il counter ha raggiunto zero stoppo il timer
-    if(retroCounter==0){
-      clearInterval(id); 
-      //passo gli elementi del dom che voglio modificare
-      creationGame(countdown,hiddenForm, numberHide, instructions);
-    }
-},1000)
+const id = setInterval(function () {
+  //decrcremento e passo valore da stampare a video
+  countdown.innerText = --retroCounter;
+  //quando il counter ha raggiunto zero stoppo il timer
+  if (retroCounter == 0) {
+    clearInterval(id);
+    //passo gli elementi del dom che voglio modificare
+    changingDom(countdown, hiddenForm, numberHide, instructions);
+  }
+}, 1000);
 
 form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    console.log(array)
-    //checkNumbers(array);
-    let input1 = document.getElementById("input-one").value;
-    let input2 = document.getElementById("input-two").value;
-    let input3 = document.getElementById("input-three").value;
-    let input4 = document.getElementById("input-four").value;
-    let input5 = document.getElementById("input-five").value;
-    console.log(input1, input2, input3, input4, input5);
-})
+  event.preventDefault();
+  console.log(array);
+  //prendo tutti gli elmenti dell'input group
+  let nodeList = document.querySelectorAll("#input-group input");
+  //conto quante occorrenze ci sono
+  let counter = checkNumbers(array, nodeList);
+
+  if(counter==5){
+    message.className = "text-success fs-1";
+    message.innerText +="hai indovinato tutti i numeri!";
+  }else if(counter<1){
+    message.className = "text-danger fs-1";
+    message.innerText +="hai indovinato 0 numeri!"
+  }else{
+    message.innerText +="hai indovinato "+counter+" numeri!"
+  }
+
+});
