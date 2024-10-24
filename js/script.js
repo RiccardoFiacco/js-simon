@@ -27,11 +27,17 @@ function numberCreation(){
             </div>`;
         }
 }
+
 //con questa funzione faccio apparire il from nascosto
 function creationGame(){
+    //faccio vedere le caselle e il tasto
     const hiddenForm = document.getElementById("answers-form");
     console.log(hiddenForm);
     hiddenForm.className= " ";
+    //nascondo i numeri
+    const numberHide = document.getElementById("numbers");
+    numberHide.className= "d-none";
+    
 }
 //---------------------------------------------------------
 //------------MAIN CODE------------------------------------
@@ -55,15 +61,6 @@ const id = setInterval(function(){
       creationGame();
     }
 },1000)
-
-
-
-
-
-
-
-
-
 
 // form.addEventListener("submit", function (event) {
 //   event.preventDefault();
