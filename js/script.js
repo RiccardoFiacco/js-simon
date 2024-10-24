@@ -27,14 +27,25 @@ function numberCreation(){
             </div>`;
         }
 }
+function timer(el){
+    //imposto il timer a 20 e lo faccio vedere subitop a schermo
+    let retroCounter = 5; 
+    el.innerText =retroCounter;
+    //decremento il tempo per ogni secondo
+    setInterval(function(){       
+        el.innerText = retroCounter--;
 
+    },1000)
+    
+}
 //---------------------------------------------------------
 //------------MAIN CODE------------------------------------
 //---------------------------------------------------------
 const form = document.getElementById("form");
 const countdown = document.getElementById("countdown");
+console.log(countdown)
 numberCreation();
-
+timer(countdown);
 
 
 
