@@ -20,12 +20,16 @@ function randomIntBetween(numOne, numTwo){
     }
 }
 function numberCreation(){
+    let arrayNum=[];
     for(let i = 0; i< 5; i++){
+        let num=randomIntBetween(1,50);
         numbers.innerHTML+= 
             `<div class="col fs-1">
-                <p>${randomIntBetween(1,50)}<p>  
+                <p>${num}<p>  
             </div>`;
-        }
+        arrayNum.push(num);
+    }
+    return arrayNum;
 }
 
 //con questa funzione faccio apparire il from nascosto
@@ -51,10 +55,10 @@ const hiddenForm = document.getElementById("answers-form");
 const instructions = document.getElementById("instructions");
 
 //creo i numeri
-numberCreation();
+const array = numberCreation();
 
 //imposto il timer a 20 e lo faccio vedere subitop a schermo
-let retroCounter = 2; 
+let retroCounter = 10; 
 countdown.innerText =retroCounter;
 
 const id = setInterval(function(){   
@@ -70,5 +74,5 @@ const id = setInterval(function(){
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  console.log("aaaaaaaaaaaaaaaaaaaaaaa")
+  console.log(array)
 })
