@@ -31,8 +31,6 @@ function numberCreation() {
             <p>${num}<p>  
         </div>`;
         arrayNum.push(num);
-        console.log(num);
-        console.log(arrayNum)
     }
   }while(arrayNum.length < 5)
   return arrayNum;
@@ -53,6 +51,22 @@ function checkNumbers(arr,list){
     return counter;
 }
 
+function startTimer(){
+  //imposto il timer a 10 e lo faccio vedere subitop a schermo
+  let retroCounter = 3;
+  countdown.innerText = retroCounter;
+
+  const id = setInterval(function () {
+    //decrcremento e passo valore da stampare a video
+    countdown.innerText = --retroCounter;
+    //quando il counter ha raggiunto zero stoppo il timer
+    if (retroCounter == 0) {
+      clearInterval(id);
+      //passo gli elementi del dom che voglio modificare
+      changingDom(countdown, hiddenForm, numberHide, instructions);
+    }
+  }, 1000);
+}
 
 //con questa funzione faccio apparire il from nascosto
 function changingDom(countdown, form, numbers, instructions) {
@@ -67,6 +81,7 @@ function changingDom(countdown, form, numbers, instructions) {
 }
 
 
+
 //---------------------------------------------------------
 //------------MAIN CODE------------------------------------
 //---------------------------------------------------------
@@ -79,30 +94,16 @@ const hiddenForm = document.getElementById("answers-form");
 const instructions = document.getElementById("instructions");
 
 //creo i numeri
-const array = numberCreation();
+let arrayNumber = numberCreation();
 
-//imposto il timer a 10 e lo faccio vedere subitop a schermo
-let retroCounter = 1;
-countdown.innerText = retroCounter;
-
-const id = setInterval(function () {
-  //decrcremento e passo valore da stampare a video
-  countdown.innerText = --retroCounter;
-  //quando il counter ha raggiunto zero stoppo il timer
-  if (retroCounter == 0) {
-    clearInterval(id);
-    //passo gli elementi del dom che voglio modificare
-    changingDom(countdown, hiddenForm, numberHide, instructions);
-  }
-}, 1000);
+startTimer();
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  console.log(array);
   //prendo tutti gli elmenti dell'input group
   let nodeList = document.querySelectorAll("#input-group input");
   //conto quante occorrenze ci sono
-  let counter = checkNumbers(array, nodeList);
+  let counter = checkNumbers(arrayNumber, nodeList);
 
   if(counter==5){
     message.innerText  =" ";
@@ -119,9 +120,27 @@ form.addEventListener("submit", function (event) {
   }
 });
 
-cleanButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    const r = document.getElementById("refresh");
-    console.log(r)
-    r.remove();
+restartButton.addEventListener("click", function () { 
+    //faccio scomparire il form
+    form.className = "d-none";
+    //metto i numeri in riga
+    numbers.className = "row";
+    //levo il countdown
+    countdown.className = " ";
+    //riscrivo il messaggio inziale
+    instructions.innerText = "Memorizza i numeri entro il tempo limite!";
+    //ripulisco l'html dai numeri che ho creato prima
+    document.getElementById("numbers").innerText = " ";
+    //creo altri numeri random che sostituisco a quelli di prima 
+    arrayNumber = numberCreation();
+    //avvio il timer
+    startTimer();
+    //levo il messaggio di testo
+    message.innerText  =" ";
+    //ripulisco i campi di input
+    let nodeList = document.querySelectorAll("#input-group input");
+    for(let i = 0; i< nodeList.length; i++){
+      let app = nodeList[i].value.toString();
+      app=" ";//
+    }
 });
