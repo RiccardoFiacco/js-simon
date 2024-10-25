@@ -19,6 +19,8 @@ function randomIntBetween(numOne, numTwo) {
     return "non un numero";
   }
 }
+
+
 function numberCreation() {
   let arrayNum = [];   
   do{
@@ -36,17 +38,21 @@ function numberCreation() {
   return arrayNum;
 }
 
+
 function checkNumbers(arr,list){    
     let counter = 0;
+    let arrayNotDouble=[];
     for(let i=0; i< list.length; i++){
         for(let j=0; j<arr.length;j++){
-           if(parseInt(list[i].value )=== arr[j]){
+           if(parseInt(list[i].value) === arr[j] && !arrayNotDouble.includes(list[i].value)){
                 counter++;
+                arrayNotDouble.push(list[i].value);
            }
         }
     }
     return counter;
 }
+
 
 //con questa funzione faccio apparire il from nascosto
 function changingDom(countdown, form, numbers, instructions) {
@@ -59,6 +65,8 @@ function changingDom(countdown, form, numbers, instructions) {
   //modifico cosa è scritto a video
   instructions.innerText = "immetti i numeri che ricordi";
 }
+
+
 //---------------------------------------------------------
 //------------MAIN CODE------------------------------------
 //---------------------------------------------------------
@@ -111,9 +119,9 @@ form.addEventListener("submit", function (event) {
   }
 });
 
-// cleanButton.addEventListener("click", function (event) {
-//     event.preventDefault();
-//     const r = document.getElementById("refresh");
-//     console.log(r)
-//     r.remove();
-// });
+cleanButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const r = document.getElementById("refresh");
+    console.log(r)
+    r.remove();
+});
